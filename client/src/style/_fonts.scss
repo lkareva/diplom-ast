@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Bold.eot');
+    src: url('../fonts/montserrat/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/montserrat/Montserrat-Bold.woff2') format('woff2'),
+        url('../fonts/montserrat/Montserrat-Bold.woff') format('woff'),
+        url('../fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Regular.eot');
+    src: url('../fonts/montserrat/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/montserrat/Montserrat-Regular.woff2') format('woff2'),
+        url('../fonts/montserrat/Montserrat-Regular.woff') format('woff'),
+        url('../fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Medium.eot');
+    src: url('../fonts/montserrat/Montserrat-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/montserrat/Montserrat-Medium.woff2') format('woff2'),
+        url('../fonts/montserrat/Montserrat-Medium.woff') format('woff'),
+        url('../fonts/montserrat/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GetVoIP Grotesque';
+    src: url('../fonts/getvoip/GetVoIPGrotesque.eot');
+    src: url('../fonts/getvoip/GetVoIPGrotesque.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/getvoip/GetVoIPGrotesque.woff2') format('woff2'),
+        url('../fonts/getvoip/GetVoIPGrotesque.woff') format('woff'),
+        url('../fonts/getvoip/GetVoIPGrotesque.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@mixin m700 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+@mixin m500 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+@mixin m400 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+@mixin logo {
+    font-family: 'GetVoIP Grotesque', sans-serif;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../fonts/icon/icomoon.eot?dzqigy');
+    src:  url('../fonts/icon/icomoon.eot?dzqigy#iefix') format('embedded-opentype'),
+      url('../fonts/icon/icomoon.ttf?dzqigy') format('truetype'),
+      url('../fonts/icon/icomoon.woff?dzqigy') format('woff'),
+      url('../fonts/icon/icomoon.svg?dzqigy#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    font-size: 22px;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-01:before {
+    content: "\e900";
+  }
+  .icon-02:before {
+    content: "\e901";
+  }
+  .icon-03:before {
+    content: "\e902";
+  }
+  .icon-04:before {
+    content: "\e903";
+  }
+  .icon-05:before {
+    content: "\e904";
+  }

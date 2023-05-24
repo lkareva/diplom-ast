@@ -1,0 +1,48 @@
+.pigeon-zoom-buttons {
+    position: absolute !important;
+    top: 20px !important;
+    left: 20px !important;
+    display: flex;
+    //flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.pigeon-zoom-in,  .pigeon-zoom-out{
+    position: relative;
+    font-size: 0 !important;
+    font-weight: 400 !important;
+    width: 41px !important;
+    height: 41px !important;
+    color: rgba(245, 245, 245, 0.7) !important;
+    background: rgba(245, 245, 245, 0.7) !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    margin-bottom: 0 !important;
+    margin-right: 10px !important;
+    box-shadow: none !important;
+    line-height: 0 !important;
+    &:not(:last-child) {
+        margin-right: 10px !important;
+    }
+    &:hover{
+        transform: scale(1.05);
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: calc(50% - 12px);
+        left: calc(50% - 12px);
+    }
+}
+
+.pigeon-zoom-in::before {
+    background: url('../img/icon/zoom-in.svg') center/contain no-repeat;
+}
+.pigeon-zoom-out::before {
+    background: url('../img/icon/zoom-out.svg') center/contain no-repeat;
+}
+
+

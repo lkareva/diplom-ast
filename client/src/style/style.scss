@@ -1,0 +1,53 @@
+/* Общие стили */
+
+/*mixin*/
+@import 'mixin';
+/* Обнуление */
+@import 'null';
+/* Шрифты */
+@import 'fonts';
+/* Элементы интерфейса */
+@import 'interface';
+@import 'toast';
+
+/* Блоки главной страницы */
+
+/* Стили header */
+@import 'blocks/header';
+/* Стили map */
+@import 'blocks/map';
+/* Стили section-map */
+@import 'blocks/section-map';
+/* Стили search*/
+@import 'blocks/search';
+/* Стили zoom */
+@import 'blocks/zoom';
+/* Стили footer */
+@import 'blocks/footer';
+/* Стили spoiler */
+@import 'blocks/spoiler';
+/* Стили chart */
+@import 'blocks/chart';
+/* Стили device-page */
+@import 'blocks/device-page';
+/* Стили preloader */
+@import 'blocks/preloader';
+/* Стили section-page */
+@import 'blocks/section-page';
+
+/* Стили pagination */
+@import 'blocks/pagination';
+/* Стили filter */
+@import 'blocks/filter';
+
+/* Стили select-add-device */
+@import 'blocks/select-add-device';
+
+/* Стили auth */
+@import 'blocks/auth';
+
+
+
+
+
+

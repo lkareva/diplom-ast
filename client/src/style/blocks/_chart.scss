@@ -1,0 +1,19 @@
+.chart {
+  background: $lightColor;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  &__tit {
+    padding-left: 20px;
+    color: #666;
+    @include ad-font(18,16);
+    text-align: center;
+    &:not(:first-child){
+      margin-top: 10px;
+    }
+  }
+}
+
+.chart-without-margin {
+  margin: 10px 0 0 0 !important;
+}

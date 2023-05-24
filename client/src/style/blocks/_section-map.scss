@@ -1,0 +1,230 @@
+.bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+}
+
+.section-map {
+    background: $lightColor;
+    border-radius: 20px;
+    padding: 20px;
+    &__is-open {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+        img {
+            cursor: pointer;
+            //transition: all 0.3s ease 0s;
+            transform: rotate(180deg) scale(1.4) translate(0,5px);
+        }
+        &.active {
+            img {
+                transform: rotate(0deg) scale(1.4) translate(0,-5px);
+            }
+        }
+    }
+    &__top {
+        background: #FFFFFF;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 20px;
+
+    }
+    &__tit {
+        min-height: 56px;
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+        h2 {
+            padding-bottom: 2px;
+        }
+    }
+    &__device {
+        color: $redColor;
+    }
+    &_items {
+        display: flex;
+        flex-direction: column;
+        &:first-child {
+            flex: 0 1 40%;
+        }
+        &:last-child {
+            flex: 0 1 60%;
+        }
+    }
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    &__device-list {
+    }
+
+    &__box {
+        height: 100%;
+    }
+    &__data-box {
+        display: flex;
+    }
+    &__data {
+        flex-grow: 1;
+    }
+    &__prev, &__next {
+        background: #FFFFFF;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        cursor: pointer;
+        img {
+            object-fit: contain;
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: calc(50% - 12px);
+            left: calc(50% - 12px);
+        }
+        &:hover {
+            background: #e8e8e8;
+        }
+    }
+    &__prev {
+        margin-right: 10px;
+        img {
+            transform: rotate(90deg);
+        }
+    }
+    &__next {
+        margin-left: 10px;
+        img {
+            transform: rotate(-90deg);
+        }
+    }
+
+    &__data-title {
+    }
+
+    &__plot {
+        background: #FFFFFF;
+        border-radius: 10px;
+        padding: 20px;
+        height: 100%;
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    &__export {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0 -10px;
+    }
+
+    &__button {
+        margin: 0 10px;
+        flex: 0 1 260px;
+        text-align: center;
+
+    }
+}
+.list-device {
+    position: relative;
+    &__box {
+        overflow: auto;
+        border-radius: 10px;
+        max-height: 240px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            width: 0;
+          }
+    }
+    &::before {
+        //content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        background: linear-gradient(0deg, $lightColor 0%, rgba(255,255,255,0) 100%);
+        z-index: 5;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.active {
+}
+
+.data-title {
+    display: flex;
+    flex: 0 1 50%;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 56px;
+    &__data {
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+        span {
+            padding-right: 10px;
+        }
+        img {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+        }
+    }
+    & ~ .chart {
+        margin-top: 10px;
+    }
+
+    &__date {
+    }
+    &_gray {
+        background: $lightColor;
+        border-radius: 10px;
+        padding: 16px 20px;
+    }
+    &__warning {
+        position: absolute;
+        width: 220px;
+        top: 0;
+        right: 0;
+        background: #FFFFFF;
+        border: 1px solid #ED3420;
+        border-radius: 10px;
+        padding: 20px;
+        transform: translate(105%, -50%);
+        z-index: 100;
+    }
+}
+
+.chart_white {
+    .data-title_gray {
+        background: #FFFFFF;
+        width: 100%;
+    }
+    .chart {
+        background: #FFFFFF;
+        border-radius: 10px;
+        height: 240px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

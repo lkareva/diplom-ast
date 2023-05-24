@@ -1,0 +1,101 @@
+.spoiler {
+  &:not(:last-child){
+    margin-bottom: 20px;
+  }
+  &__wrap {
+    background: #FFFFFF;
+    border-radius: 10px;
+  }
+  &.current &__tit{
+    font-weight: bold;
+  }
+  &__tit {
+    position: relative;
+    display: flex;
+    padding: 16px 20px;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      background: url('../img/icon/arrow.svg') center/contain no-repeat;
+      height: 6px;
+      width: 21px;
+      top: 23px;
+      right: 20px;
+    }
+    span {
+      width: 93%;
+    }
+    &.active::after {
+      transform: rotate(180deg);
+    }
+
+    &:not(.active) {
+      span {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+
+  &__ul {
+    padding: 0 35px 16px 35px;
+  }
+  &__body {
+    overflow: hidden;
+  }
+
+  &__li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+    &.current {
+      color: $redColor;
+      font-weight: 700;
+    }
+  }
+
+  &__a {
+  }
+
+  &-enter-done {
+    transform: translateY(0%);
+    transition: all .3s ease-in 0s;
+  }
+  &-enter-active {
+    transform: translateY(-100%);
+  }
+  &-exit-done {
+    transform: translateY(-100%);
+  }
+  &-exit-active {
+    transform: translateY(-100%);
+    transition: all .3s ease-in 0s;
+  }
+}
+
+.btn-delete {
+
+  img {
+    width: 14px;
+    margin-top: 5px;
+  }
+}
+
+.spoiler__ul--is-delete {
+  .spoiler {
+    &__li {
+      background: #CA584C26;
+      padding: 0 10px;
+      border-radius: 10px;
+      margin: 0 -10px 10px;
+    }
+  }
+}

@@ -1,0 +1,103 @@
+$mainColor: #282828; 
+$lightColor: #F5F5F5;
+$redColor: #ED3420;
+
+body {
+    color: #282828;
+    background: #FFFFFF;
+    @include m400;
+    @include ad-font(16,14);
+    line-height: 120%;
+    &.lock {
+        overflow: hidden;
+        touch-action: none;
+    }
+}
+
+#root {
+	min-height: 100%;
+    max-width: 100vw;
+	overflow: hidden;
+    display: flex;
+    > main {
+        flex-grow: 1;
+    }
+}
+main {
+    position: relative;
+    margin-left: 290px;
+    padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 120%;
+    @include ad-font(24,20);
+    &:not(:last-child) {
+        @include ad-pb(20,10);
+    }
+}
+[class*="__title"] {
+    &:not(:last-child) {
+        @include ad-pb(20,10);
+    }
+}
+
+p:not(:last-child){
+    padding: 0 0 10px 0;
+}
+
+a {
+    transition: all 0.3s ease 0s;
+    &:hover {
+        color: $redColor;
+    }
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 20px;
+    color: $redColor;
+    border-radius: 10px;
+    border: 1px solid $redColor;
+    transition: all 0.3s ease 0s;
+    &:hover {
+        background: rgba($redColor, 3%);
+        
+    }
+    &_bold {
+        border: 2px solid $redColor;
+    }
+}
+.red-text{
+    color: $redColor;
+    
+}
+[class*="__img"] {
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+
+    }
+}
+strong {
+    font-weight: 700;
+    &.red {
+        color: $redColor;
+    }
+}
+[class*="__text"] {
+    span {
+        display: block;
+    }
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+

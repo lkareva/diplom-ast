@@ -1,0 +1,120 @@
+.search__form {
+  width: 400px;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.add-device {
+  &__select {
+    width: 400px;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+.select--transparent {
+  .select-add-device__control {
+      background-color: rgba(245, 245, 245, 0.7) !important;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(50% - 12px);
+      left: 10px;
+      width: 24px;
+      height: 24px;
+      background: url("../img/icon/search.svg") center/contain no-repeat;
+      opacity: 0.6;
+    }
+  }
+  .select-add-device__value-container {
+    padding: 8px !important;
+  }
+  .select-add-device__single-value, .select-add-device__placeholder, .select-add-device__input-container {
+    margin-left: 40px !important;
+    color: hsl(0, 0%, 60%);
+  }
+}
+.select-add-device{
+  &__control {
+    background-color: #f5f5f5 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    max-width: 400px !important;
+  }
+  &__value-container {
+    padding: 15px !important;
+  }
+
+  &__input-container &__single-value {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  &__single-value, &__placeholder, &__input-container {
+    //color: hsl(0, 0%, 60%) !important;
+  }
+
+  &__indicator-separator {
+    display: none;
+  }
+
+  &__dropdown-indicator{
+    padding: 10px !important;
+    svg {
+      opacity: 0;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      background: url('../img/icon/arrow.svg') center/contain no-repeat;
+      height: 6px;
+      width: 21px;
+      top: calc(50% - 3px);
+      right: 20px;
+      opacity: 0.6;
+    }
+  }
+  &__control--menu-is-open &__indicator::after {
+    transform: rotate(180deg);
+  }
+
+  &__menu {
+    background-color: #F5F5F5 !important;
+    border-radius: 10px !important;
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+  }
+
+  &__menu-list {
+    padding-bottom: 8px !important;
+    padding-top: 8px !important;
+    overflow: auto !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
+  }
+
+  &__option {
+    padding: 10px !important;
+    &--is-focused {
+      background: #E6E6E6 !important;
+    }
+    &--is-selected {
+      background: #858688 !important;
+    }
+  }
+}

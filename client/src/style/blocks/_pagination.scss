@@ -1,0 +1,24 @@
+.pagination {
+  display: inline-flex;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  .current,
+  .current &__link {
+    background-color: $lightColor;
+    border-radius: 5px;
+  }
+  &__link {
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px;
+    line-height: 100%;
+    &:visited {
+      color: inherit;
+    }
+  }
+  &__arrow-previous, &__arrow-next {
+    font-size: 30px;
+    line-height: 32%;
+  }
+}
