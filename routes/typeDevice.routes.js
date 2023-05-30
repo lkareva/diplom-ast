@@ -1,14 +1,14 @@
 const {Router} = require('express')
 const TypeDevice = require('../models/TypeDevice')
 const {check, validationResult} = require("express-validator");
-const auth = require('../middleware/auth.middleware')
-const SectionMap = require("../models/SectionMap");
+const passport = require("passport");
+const Device = require("../models/Device");
 const router = Router()
 
 // /api/type-device
 router.get(
     '/',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const typeDeviceAll = await TypeDevice.find({})
@@ -24,7 +24,7 @@ router.get(
 
 router.get(
     '/:id',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const device = await TypeDevice.findById(req.params.id)
@@ -37,11 +37,31 @@ router.get(
         }
     })
 
+
+router.get(
+    '/:id/list-device',
+    passport.authenticate('jwt', {session: false}),
+    async (req, res) => {
+        try {
+            const type = await TypeDevice.findById(req.params.id)
+            if(!type) {
+                return res.status(404).json({ message: 'Тип устройства не найден'})
+            }
+            const deviceAll = await Device.find({idType: req.params.id})
+            if(!deviceAll) {
+                return res.status(404).json({ message: 'Ничего не найдено'})
+            }
+            return res.json(deviceAll.map((i) => i._id))
+        } catch (e) {
+            res.status(500).json({ message: 'Что-то пошло не так'})
+        }
+    })
+
 router.post(
     '/',
     [
         check('name', 'Введите название типа устройств').exists(),
-        auth
+        passport.authenticate('jwt', {session: false}),
     ],
     async (req, res) => {
         try {

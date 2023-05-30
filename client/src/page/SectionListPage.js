@@ -1,14 +1,22 @@
-import React, {useState} from "react";
-
+import React, {useEffect, useState} from "react";
 import SectionListContainer from "../components/SectionList/SectionListContainer";
 import {SectionMap} from "../components/Section/SectionMap";
 import {useSectionMap} from "../hooks/hookAPI/sectionMap.hook";
 import {Loader} from "../components/UI/Loader";
 
+const storageName = 'sectionIdPage'
+
 const SectionListPage = () => {
     const [sectionId, setSectionId] = useState(null)
     const {section, loadingSection} = useSectionMap(sectionId)
 
+    useEffect(() => {
+        setSectionId(JSON.parse(sessionStorage.getItem(storageName)));
+    }, [])
+
+    useEffect(() => {
+        sessionStorage.setItem(storageName, JSON.stringify(sectionId))
+    }, [sectionId])
     const changeSection = (sectionId) => {
         setSectionId(sectionId)
     }

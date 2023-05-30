@@ -1,24 +1,30 @@
- const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const User = require('../models/User')
 const config = require('config')
 
-module.exports = (req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    return next()
-  }
+const options = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: config.get('jwtSecret')
+}
 
-  try {
+module.exports = passport => {
+  passport.use(
+      new JwtStrategy(options, async (payload, done) => {
+        try {
+          const user = await User.findOne({userId: payload.id});
 
-    const token = req.headers.authorization.split(' ')[1] // "Bearer TOKEN"
 
-    if (!token) {
-      return res.status(401).json({ message: 'Нет авторизации' })
-    }
+          if(user) {
+            done(null, user);
+          } else {
+            done(null, false);
+          }
+        } catch(e) {
+          console.log(e)
+        }
 
-    const decoded = jwt.verify(token, config.get('jwtSecret'))
-    req.user = decoded
-    next()
-
-  } catch (e) {
-    res.status(401).json({ message: 'Нет авторизации' })
-  }
+      })
+  )
 }

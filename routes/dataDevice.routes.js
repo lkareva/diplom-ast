@@ -2,14 +2,13 @@ const {Router} = require('express')
 const Device = require('../models/Device')
 const DataDevice = require('../models/DataDevice')
 const {check, validationResult} = require("express-validator");
-const auth = require('../middleware/auth.middleware')
-const SectionMap = require("../models/SectionMap");
+const passport = require("passport");
 const router = Router()
 
 // /api/data
 router.get(
     '/',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const dataAll = await DataDevice.find({})
@@ -25,7 +24,7 @@ router.get(
 
 router.get(
     '/:id',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const data = await DataDevice.findById(req.params.id)
@@ -44,7 +43,7 @@ router.post(
     [
         check('data', 'Введите данные').exists(),
         check('idDevice', 'Выберете номер устройства').exists(),
-        auth
+        passport.authenticate('jwt', {session: false}),
     ],
     async (req, res) => {
         try {
@@ -75,7 +74,7 @@ router.post(
 
 router.delete(
     '/:id',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const data = await DataDevice.findByIdAndRemove(req.params.id)

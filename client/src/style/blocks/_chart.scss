@@ -17,3 +17,12 @@
 .chart-without-margin {
   margin: 10px 0 0 0 !important;
 }
+
+
+.chart-media-500 {
+  .recharts-responsive-container {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+  }
+}

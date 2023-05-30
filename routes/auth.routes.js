@@ -1,9 +1,10 @@
-const {Router, response, json} = require('express')
+const {Router} = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
+const passport = require('passport')
 const router = Router()
 
 // /api/auth/register
@@ -23,7 +24,7 @@ router.post(
                     message: 'Некорректные данные при регистрации'
                 })
             }
-            const {email, password} = req.body
+            const {email, password, fullName} = req.body
 
             const candidate = await User.findOne({email})
 
@@ -32,7 +33,7 @@ router.post(
             }
 
             const hashedPassword = await bcrypt.hash(password, 12)
-            const user = new User({email, password: hashedPassword})
+            const user = new User({email, password: hashedPassword, fullName: fullName || "" })
 
             await user.save()
 
@@ -47,7 +48,7 @@ router.post(
 router.post(
     '/login',
     [
-        check('email', 'Введите корректный email').normalizeEmail().isEmail(),
+        check('email', 'Введите корректный email').isEmail(),
         check('password', 'Введите пароль').exists()
     ],
     async (req, res) => {
@@ -62,7 +63,6 @@ router.post(
             }
 
             const {email, password} = req.body
-
             const user = await User.findOne({email})
 
             if (!user) {
@@ -77,7 +77,7 @@ router.post(
             const token = jwt.sign(
                 {userId: user.id},
                 config.get('jwtSecret'),
-                {expiresIn: '1h'}
+                {expiresIn: '12h'}
             )
             return res.json({token, userId: user.id, userEmail: user.email})
 
@@ -85,5 +85,19 @@ router.post(
             res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова'})
         }
 })
+router.get(
+    '/:id',
+    passport.authenticate('jwt', {session: false}),
+    async (req, res) => {
+        try {
+            const user = await User.findById(req.params.id)
+            if(!user) {
+                return res.status(404).json({ message: 'Пользователь не найден'})
+            }
+            return res.json(user)
+        } catch (e) {
+            res.status(500).json({ message: 'Что-то пошло не так'})
+        }
+    })
 
 module.exports = router

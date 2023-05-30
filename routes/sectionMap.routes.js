@@ -1,15 +1,15 @@
 const {Router} = require('express')
 const SectionMap = require('../models/SectionMap')
 const {check, validationResult} = require("express-validator");
-const auth = require('../middleware/auth.middleware')
 const Device = require("../models/Device");
 const DataDevice = require("../models/DataDevice");
+const passport = require("passport");
 const router = Router()
 
 // /api/section-map
 router.get(
     '/all',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const sectionMapAll = await SectionMap.find({})
@@ -24,7 +24,7 @@ router.get(
 )
 router.get(
     '/',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const {page, limit} = req.query
@@ -46,7 +46,7 @@ router.get(
 
 router.get(
     '/:id',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const sectionMap = await SectionMap.findById(req.params.id)
@@ -61,7 +61,7 @@ router.get(
 // api/section-map/:id
 router.get(
     '/:id/device',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const sectionMap = await SectionMap.findById(req.params.id)
@@ -80,7 +80,7 @@ router.get(
 
 router.get(
     '/:idSection/device/:idDevice',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const sectionMap = await SectionMap.findById(req.params.idSection)
@@ -106,7 +106,7 @@ router.post(
     [
         check('name', 'Введите уникальное название анкерного участка').exists(),
         check('from', 'Введите название участка дороги').exists(),
-        auth
+        passport.authenticate('jwt', {session: false}),
     ],
     async (req, res) => {
         try {
@@ -140,7 +140,7 @@ router.post(
 
 router.delete(
     '/:id',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const sectionMap = await SectionMap.findByIdAndRemove(req.params.id)
@@ -155,7 +155,7 @@ router.delete(
 
 router.put(
     '/:id',
-    auth,
+    passport.authenticate('jwt', {session: false}),
     [
         check('name', 'Введите уникальное название анкерного участка').exists(),
         check('from', 'Введите название участка дороги').exists()
@@ -186,9 +186,7 @@ router.put(
     })
 router.put(
     '/desc/:id',
-    auth,
-    [
-    ],
+    passport.authenticate('jwt', {session: false}),
     async (req, res) => {
         try {
             const errors = validationResult(req)

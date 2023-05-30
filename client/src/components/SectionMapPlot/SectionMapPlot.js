@@ -1,12 +1,14 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {metaData} from "../../utils/utils";
 import LastData from "../UI/LastData";
 import ChartData from "../UI/ChartData";
+import {useResizeWidth} from "../../hooks/width.hook";
 
 const SectionMapPlot = ({data, isOpenBottom}) => {
     const dataKey = Object.keys(data[0]).filter(key => key !== "time" && key !== "_id")
     const [isOpenData, setIsOpenData] = useState(0)
-    console.log(isOpenData)
+    const refChar = useRef(null);
+    const {width} = useResizeWidth(refChar)
     return (
         <>  {isOpenData !== 0 && dataKey.length !== 1 && <div className="section-map__prev"
                  onClick={() => 0 < isOpenData ? setIsOpenData(prev => prev - 1) : -1}
@@ -17,8 +19,8 @@ const SectionMapPlot = ({data, isOpenBottom}) => {
             </div>}
             {dataKey.map(key => {
                 const meta = metaData.find((item => item.code === key))
-                const d = parseFloat(data.at(-1)[key]).toFixed(1)
-                const t = data.at(-1).time
+                const d = parseFloat(data.at(0)[key]).toFixed(1)
+                const t = data.at(0).time
                 return (
                     <>
                         { meta && dataKey[isOpenData] === key &&
@@ -29,8 +31,14 @@ const SectionMapPlot = ({data, isOpenBottom}) => {
                                     dataLabel={meta.name}
                                     dataUnit={meta.unit}
                                     dataNormal={meta.normal}/>
-                                {isOpenBottom && <div className={"chart chart-without-margin"}>
-                                    <ChartData height={200} dataNormal={meta.normal} dataName={key} dataUnit={meta.unit} data={data}/>
+                                {isOpenBottom && <div ref={refChar} className={width > 500 ?"chart chart-without-margin" : "chart chart-without-margin chart-media-500" }>
+                                    <ChartData
+                                        widthMedia={width}
+                                        height={200}
+                                        dataNormal={meta.normal}
+                                        dataName={key}
+                                        dataUnit={meta.unit}
+                                        data={data}/>
                                 </div>}
                             </div>
 

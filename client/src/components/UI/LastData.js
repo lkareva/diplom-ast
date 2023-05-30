@@ -13,12 +13,14 @@ const LastData = ({dataLabel, dataData, dataDate, dataUnit, dataNormal}) => {
     }
 
     const date = new Date(dataDate)
+    const dateString = date.toLocaleString("ru",options)
+    const dateArray = dateString.split(',')
     return (
         <div className="data-title data-title_gray">
             <div className="data-title__data">
                 <div>
                     <span>{dataLabel}</span>
-                    <strong>{dataData} {dataUnit}</strong>
+                    <strong>{dataData}{dataUnit}</strong>
                 </div>
                 { dataData < dataNormal && <>
                     <img onMouseOver={handleMouseOver}
@@ -29,7 +31,7 @@ const LastData = ({dataLabel, dataData, dataDate, dataUnit, dataNormal}) => {
                     <div className="data-title__warning">Данные ниже нормы</div>
                 )}
             </div>
-            <div className="data-title__date">{date.toLocaleString("ru",options)}</div>
+            <div className="data-title__date"><span>{dateArray[0]},</span><span>{dateArray[1]}</span></div>
         </div>
     );
 };

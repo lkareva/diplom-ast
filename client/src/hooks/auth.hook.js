@@ -1,4 +1,5 @@
 import {useState, useCallback, useEffect} from 'react'
+import {isTokenExpired} from "../utils/utils"
 
 const storageName = 'userData'
 
@@ -6,7 +7,6 @@ export const useAuth = () => {
   const [token, setToken] = useState(null)
   const [ready, setReady] = useState(false)
   const [userId, setUserId] = useState(null)
-
   const login = useCallback((jwtToken, id) => {
     setToken(jwtToken)
     setUserId(id)
@@ -25,13 +25,12 @@ export const useAuth = () => {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem(storageName))
-
     if (data && data.token) {
-      login(data.token, data.userId)
+      if(!isTokenExpired(localStorage.getItem(storageName))) {
+        login(data.token, data.userId)
+      }
     }
     setReady(true)
   }, [login])
-
-
-  return { login, logout, token, userId, ready }
+  return { login, logout, token, userId, ready}
 }

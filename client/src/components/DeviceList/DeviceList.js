@@ -1,13 +1,16 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Spoiler from "../UI/Spoiler";
 import {AuthContext} from "../../context/AuthContext";
 import {useMessage} from "../../hooks/message.hook";
 import {useMutation, useQueryClient} from "react-query";
+import AddModal from "../UI/Modal/Modal";
 
 export const DeviceList = ({typeDevices,devices, isDelete}) => {
     const queryClient = useQueryClient()
     const {token} = useContext(AuthContext)
+    const [modalDelete, setModalDelete] = useState(false)
+    const [itemDelete, setItemDelete] = useState("")
     const deleteDeviceMutation = useMutation( (deviceId) => {
         return fetch (
             `/api/device/${deviceId}`, {
@@ -15,10 +18,15 @@ export const DeviceList = ({typeDevices,devices, isDelete}) => {
                 body: null,
                 headers: {Authorization: `Bearer ${token}`}
             }).then((response) => response.json())
-    }, {onSuccess: () => {
-            message("Устройство удалено")
+    }, {
+        onError: (context) => {
+            message(context.message)
+        },
+        onSuccess: (context) => {
+            message(context.message)
             queryClient.invalidateQueries('deviceList')
-    }})
+        }
+    })
     const message = useMessage()
     const navigate = useNavigate()
 
@@ -30,8 +38,13 @@ export const DeviceList = ({typeDevices,devices, isDelete}) => {
         navigate(`/section-map-devices/${item._id}`)
     }
 
+    const deleteItem = (item) =>{
+        setItemDelete(item._id)
+        setModalDelete(true)
+    }
     const deleteDevice = (item) =>{
-        deleteDeviceMutation.mutate(item._id)
+        deleteDeviceMutation.mutate(item)
+        setModalDelete(false)
     }
 
     return (
@@ -45,13 +58,24 @@ export const DeviceList = ({typeDevices,devices, isDelete}) => {
                                 key={item._id}
                                 title={item.name}
                                 body={devices.filter(i => i.idType === item._id)}
-                                onClickSpoiler={!isDelete ? navigateToDevice : deleteDevice}
+                                onClickSpoiler={!isDelete ? navigateToDevice : deleteItem}
                                 isDelete={isDelete}
                                 loading={deleteDeviceMutation.isLoading}
                             />
                         )
                     })}
             </div>}
+            <AddModal visible={modalDelete} setVisible={setModalDelete}>
+                <div className="device__message">Вы действительно хотите удалить?</div>
+                <div className="device__box-btn">
+                    <button className="device__btn btn" onClick={() => deleteDevice(itemDelete)}>
+                        Удалить
+                    </button>
+                    <button className="device__btn btn" onClick={()=> setModalDelete(false)}>
+                        Отмена
+                    </button>
+                </div>
+            </AddModal>
         </div>
     )
 }

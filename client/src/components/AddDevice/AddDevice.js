@@ -25,9 +25,8 @@ const AddDevice = ({addDeviceForm, setAddDeviceForm, listDeviceType, listSection
 
     return (
         <>
-            <div className="search__form">
+            <div className="search__form" id="add-device-name">
                 <MyInput
-                    id="add-device-name"
                     name="add-device-name"
                     type="text"
                     placeholder="Введите имя устройсва"
@@ -37,6 +36,7 @@ const AddDevice = ({addDeviceForm, setAddDeviceForm, listDeviceType, listSection
                 />
             </div>
             <Select
+                id="add-device-typeId"
                 name="add-device-typeId"
                 className="add-device__select"
                 classNamePrefix="select-add-device"
@@ -48,6 +48,7 @@ const AddDevice = ({addDeviceForm, setAddDeviceForm, listDeviceType, listSection
                 onChange={newValue => newValue ? setAddDeviceForm({...addDeviceForm, idType: newValue.value}) : setAddDeviceForm({...addDeviceForm, idType: ''})}
             />
             <Select
+                id="add-device-sectionId"
                 name="add-device-sectionId"
                 className="add-device__select"
                 classNamePrefix="select-add-device"
@@ -66,7 +67,6 @@ const AddDevice = ({addDeviceForm, setAddDeviceForm, listDeviceType, listSection
                     >Добавить устройство</button>
                 </div>
             </div>
-
         </>
     )
 }

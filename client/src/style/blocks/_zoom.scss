@@ -45,4 +45,11 @@
     background: url('../img/icon/zoom-out.svg') center/contain no-repeat;
 }
 
+@media screen and (max-width: 1140px) {
+    .pigeon-zoom-buttons {
+        top: 10px !important;
+        left: 10px !important;
+    }
+}
+
 

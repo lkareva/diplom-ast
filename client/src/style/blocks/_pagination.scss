@@ -21,4 +21,10 @@
     font-size: 30px;
     line-height: 32%;
   }
+
+  @media screen and (max-width: 320px) {
+    &__link{
+      padding: 8px 10px;
+    }
+  }
 }

@@ -20,7 +20,6 @@ export const MyRoutes = ({}) => {
                     <Routes>
                         <Route path="/" exact element={<FrontPage/>}/>
                         <Route path="/manual" exact element={<ManualPage/>}/>
-                        <Route path="/account" exact element={<AccountPage/>}/>
                         <Route path="/section-map-devices" exact element={<SectionListPage/>}/>
                         <Route path="/section-map-devices/:idDevice" element={<DevicePage/>}/>
                         <Route path="*" element={<NotFoundPage />} />

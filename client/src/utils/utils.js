@@ -36,11 +36,11 @@ export const metaData = [
         code: "sensor-ice",
         name: "Датчик гололеда",
         unit: "мм",
-        normal: 0
+        normal: 10000
     },
     {
         code: "t",
-        name: "t провода",
+        name: "Температура провода",
         unit: "°C",
         normal: 20
     },
@@ -88,15 +88,15 @@ export const genPages = (current, totalPage) => {
         bet: 0,
         ween: 0
     }
-    if(current <= 3) {
+    if(current <= 2) {
         between.bet = 1
-        between.ween = 6
-    } else if(current > totalPage - 3) {
-        between.bet = totalPage - 6
+        between.ween = 3
+    } else if(current > totalPage - 2) {
+        between.bet = totalPage - 3
         between.ween = totalPage - 1
     } else {
-        between.bet = current - 3
-        between.ween = current + 2
+        between.bet = current - 2
+        between.ween = current + 1
     }
     const allPages = pages.filter(
         page => first(page) || middle(page, between) || last(page)
@@ -114,3 +114,6 @@ export const addEtc = (pages) => {
     lastPage !== secondLast + 1 && pages.splice(pages.length - 1, 0, "...")
     return pages
 }
+
+export const isTokenExpired = token => Date.now() >= (JSON.parse(atob(token.split('.')[1]))).exp * 1000
+

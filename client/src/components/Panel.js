@@ -1,9 +1,9 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {GeoJson, Map, ZoomControl} from "pigeon-maps"
 import { maptiler } from 'pigeon-maps/providers'
 import ContainerBlockMapMain from "./BlockMapMain/ContainerBlockMapMain";
 import SearchSection from "./SearchSection";
-
+const storageName = 'sectionIdMap'
 const MY_API_KEY = '8MSKbSOUAF2pGGRdLDJO'
 const maptilerProvider = maptiler(MY_API_KEY, 'basic-v2-light')
 
@@ -12,6 +12,15 @@ export const Panel = ({sections}) => {
     const [isOpenBottom, setIsOpenBottom] = useState(false)
     const [center, setCenter] = useState([...sections[4].coordinates[0]].reverse())
     const [zoom, setZoom] = useState(12)
+
+    useEffect(() => {
+        setAnchor(JSON.parse(sessionStorage.getItem(storageName)) || sections[4]._id);
+    }, [])
+
+    useEffect(() => {
+        sessionStorage.setItem(storageName, JSON.stringify(anchor))
+    }, [anchor])
+
     const onAnchor = (id) => {
         setAnchor(id)
         const anchorActive = sections.find(item => item._id === id)
@@ -40,7 +49,7 @@ export const Panel = ({sections}) => {
     })
 
     return (
-        <>
+        <div className='map-box'>
             <svg  width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{position:'absolute'}}>
                 <defs>
                     <marker
@@ -97,6 +106,6 @@ export const Panel = ({sections}) => {
                     <ContainerBlockMapMain sectionId={anchor} isOpenBottom={isOpenBottom}/>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

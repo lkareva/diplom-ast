@@ -8,8 +8,8 @@ const Filter = ({children, classNameLocal}) => {
     return (
         <div className={classNameLocal ? classNameLocal + " filter" : "filter"}>
             <div className="filter__btn" onClick={reveal}><img src={require("../../img/icon/filter.svg")} alt=""/></div>
-            {!hidden &&  <div className="filter__container" onClick={() => setHidden(true)}>
-                <div className="filter__body"  onClick={(e) => e.stopPropagation()}>
+            {!hidden &&  <div className="filter__container">
+                <div className="filter__body">
                     <div className="filter__tit">Выбрать метр</div>
                     {children}
                 </div>

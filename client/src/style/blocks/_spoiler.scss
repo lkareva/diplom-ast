@@ -99,3 +99,8 @@
     }
   }
 }
+@media screen and (max-width: 860px) {
+  .spoiler:not(:last-child){
+    margin-bottom: 10px;
+  }
+}

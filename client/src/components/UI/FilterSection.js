@@ -41,7 +41,7 @@ const FilterSection = ({filter, setFilter}) => {
                         onChange={e => setFilter({...filter, sortTo: e.target.value})}
                     />
                 </div>
-
+                <div className="filter__update icon-03" onClick={() => setFilter({...filter, sortFrom: 0, sortTo:640000})}></div>
             </Filter>
         </div>
     )

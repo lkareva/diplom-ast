@@ -1,8 +1,5 @@
 .bottom {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
+    position: relative;
     width: auto;
 }
 
@@ -78,6 +75,7 @@
     }
     &__data {
         flex-grow: 1;
+        width: 0;
     }
     &__prev, &__next {
         background: #FFFFFF;
@@ -176,12 +174,18 @@
     justify-content: space-between;
     align-items: center;
     min-height: 56px;
+    gap: 10px;
     &__data {
         display: inline-flex;
         align-items: center;
         position: relative;
+        > div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         span {
-            padding-right: 10px;
+
         }
         img {
             width: 24px;
@@ -194,6 +198,10 @@
     }
 
     &__date {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: flex-end;
     }
     &_gray {
         background: $lightColor;
@@ -203,14 +211,22 @@
     &__warning {
         position: absolute;
         width: 220px;
-        top: 0;
+        bottom: 20px;
         right: 0;
         background: #FFFFFF;
         border: 1px solid #ED3420;
         border-radius: 10px;
         padding: 20px;
-        transform: translate(105%, -50%);
+        transform: translate(100%, 0);
         z-index: 100;
+        @media screen and (max-width: 600px) {
+            width: 130px;
+            transform: translate(-20%, 0);
+        }
+    }
+    @media screen and (max-width: 360px) {
+        flex-direction: column;
+        align-items: flex-end;
     }
 }
 
@@ -228,3 +244,66 @@
         align-items: center;
     }
 }
+
+.device {
+    &__message {
+        padding-bottom: 10px;
+    }
+    &__box-btn {
+        display: flex;
+        justify-content: space-around;
+        & > .btn {
+            flex: 0 0 45%;
+            text-align: center;
+        }
+    }
+}
+@media screen and (max-width: 1140px) {
+    .search-main {
+        top: 10px !important;
+        right: 10px !important;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .bottom {
+        margin-top: 100px;
+    }
+    .section-map__body {
+        flex-direction: column;
+    }
+    .section-map__tit {
+        min-height: auto;
+    }
+    .section-map__is-open img {
+        transform: scale(1.3) translate(0, -4px);
+    }
+    .section-map__is-open.active img {
+        transform: rotate(180deg) scale(1.3) translate(0, 4px);
+    }
+}
+@media screen and (max-width: 460px) {
+    .search-main {
+        width: calc(100vw - 122px);
+    }
+    .section-map__prev, .section-map__next {
+        padding: 15px;
+    }
+    .section-map {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .data-title_gray {
+        flex-direction: column;
+        align-items: flex-end;
+        .data-title__data{
+            flex-direction: column;
+            align-items: flex-end;
+            row-gap: 2px;
+        }
+    }
+}
+
+

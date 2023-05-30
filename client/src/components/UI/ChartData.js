@@ -1,7 +1,7 @@
 import React from 'react'
 import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {options} from '../../utils/utils'
-const ChartData = ({data, height, dataNormal, dataName, dataUnit}) => {
+const ChartData = ({data, height, dataNormal, dataName, dataUnit, widthMedia}) => {
     const gradientOffset = (dataNormal) => {
         const dataMax = Math.max(...data.map((i) => i[dataName]))
         const dataMin = Math.min(...data.map((i) => i[dataName]))
@@ -24,12 +24,13 @@ const ChartData = ({data, height, dataNormal, dataName, dataUnit}) => {
                 height={300}
                 syncId="anyId"
                 data={[...data].sort((a, b) => a.time > b.time ? 1 : -1)}
-                margin={{
+                margin={widthMedia > 500 &&{
                     top: 20,
                     right: 40,
                     left: 40,
                     bottom: 0,
                 }}
+
                 baseValue={dataNormal}
             >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -45,6 +46,7 @@ const ChartData = ({data, height, dataNormal, dataName, dataUnit}) => {
                     }}
                     isCategorical={false}
                     tickMargin={10}
+                    hide={widthMedia <= 500}
                 />
                 <YAxis
                     allowDataOverflow={true}
@@ -54,6 +56,7 @@ const ChartData = ({data, height, dataNormal, dataName, dataUnit}) => {
                     tickFormatter={(value) => {
                         return parseFloat(value).toFixed(1)
                     }}
+                    hide={widthMedia <= 500}
                 />
                 <Tooltip
                     wrapperStyle={{outline: 'none'}}
@@ -72,7 +75,11 @@ const ChartData = ({data, height, dataNormal, dataName, dataUnit}) => {
                         <stop offset={off} stopColor="#ED3420" stopOpacity={1} />
                     </linearGradient>
                 </defs>
-                <Area type="monotone" dataKey={dataName} stroke="#282828" fill={"url(#splitColor-"+dataName+")"}/>
+                <Area
+                    type="monotone"
+                    dataKey={dataName}
+                    stroke="#282828"
+                    fill={"url(#splitColor-"+dataName+")"}/>
             </AreaChart>
         </ResponsiveContainer>
     )

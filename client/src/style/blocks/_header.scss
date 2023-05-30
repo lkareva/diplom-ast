@@ -3,14 +3,18 @@
     top: 0;
     left: 0;
     height: 100vh;
-    width: 290px;
-    background: $lightColor;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
+    width: 280px;
     z-index: 100;
-
+    &__container {
+        width: 280px;
+        height: 100vh;
+        background: $lightColor;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+        transition: transform 0.3s ease 0.1s;
+    }
     &__top {
     }
 
@@ -101,7 +105,6 @@
     &__img {
         border-radius: 50%;
         overflow: hidden;
-        cursor: pointer;
 
     }
     &__content{
@@ -111,12 +114,78 @@
     }
     &__name {
         @include m700;
-        cursor: pointer;
     }
 
     &__email {
         font-size: 10px;
         text-decoration-line: underline;
-        cursor: pointer;
+    }
+}
+
+.header-mob {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f5f5f5;
+    z-index: 101;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    .logo {
+        &__img {
+            width: 35px;
+            height: 35px;
+        }
+    }
+}
+
+@media screen and (min-width: 1141px){
+
+    .header-mob {
+        display: none;
+    }
+
+}
+@media screen and (max-width: 1140px){
+    .header {
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0s ease 0.3s, z-index 0s ease 0.3s;
+        &__container {
+            transform: translateX(-200%);
+            padding: 10px;
+        }
+        &__logo {
+            display: none;
+        }
+        &__button {
+            margin-top: 65px;
+        }
+    }
+
+    .header--is-open {
+        transition: opacity 0s ease 0s, z-index 0s ease 0s;
+        opacity: 1;
+        z-index: 100;
+        .header__container {
+            transform: translateX(0%);
+        }
+        background: rgba(0,0,0, 0.5);
+        width: 100vw;
+    }
+
+    main {
+        margin: 55px 0 0 0;
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 860px) {
+    .header__button {
+        margin-bottom: 20px;
+    }
+    .profile-header {
+        margin-top: 30px;
     }
 }

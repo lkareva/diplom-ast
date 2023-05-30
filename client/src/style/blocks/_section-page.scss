@@ -1,9 +1,12 @@
 .section-page {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   &__tit {
     padding-bottom: 40px;
+    @media screen and (max-width: 880px) {
+      padding-bottom: 20px;
+    }
   }
 
   &__options {
@@ -12,6 +15,11 @@
     gap: 20px;
     &:not(:last-child){
       padding-bottom: 40px;
+    }
+    @media screen and (max-width: 880px) {
+      &:not(:last-child){
+        padding-bottom: 20px;
+      }
     }
   }
 
@@ -33,14 +41,20 @@
   }
 
   &__section-list {
-    flex: 0 0 40%;
+    flex: 0 1 40%;
     padding: 0 10px;
 
   }
 
   &__device-list {
-    flex: 0 0 60%;
+    flex: 0 1 60%;
     padding: 0 10px;
+  }
+  @media screen and (max-width: 768px) {
+    &__content{
+      row-gap: 10px;
+      flex-direction: column;
+    }
   }
 }
 .section-list {
@@ -60,6 +74,21 @@
   &__item {
     &:not(:last-child) {
       margin-bottom: 20px;
+    }
+  }
+  @media screen and (max-width: 1140px) {
+    &__wrap {
+      height: calc(100vh - 232px);
+    }
+  }
+  @media screen and (max-width: 880px) {
+    &__wrap {
+      height: calc(100vh - 190px);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    &__wrap {
+      height: calc(100vh - 390px);
     }
   }
 }
@@ -102,6 +131,7 @@
     display: flex;
     flex-direction: column;
   }
+
   &__list {
     flex-grow: 1;
     &:not(:last-child) {
@@ -123,12 +153,15 @@
     margin: 0 -10px;
   }
   &__btn-wrap {
-    flex: 0 0 50%;
+    flex: 0 1 50%;
     padding: 0 10px;
+    height: 100%;
     .btn {
       width: 100%;
+      height: 100%;
       text-align: center;
       background: #FFFFFF;
+      font-size: 13px;
       &:hover {
         background: rgba(237, 52, 32, 0.03);
       }
@@ -137,5 +170,40 @@
       }
     }
 
+  }
+  @media screen and (max-width: 1140px) {
+    .list-device {
+      &__box {
+        max-height: calc(100vh - 332px);
+        height: calc(100vh - 332px);
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .list-device {
+      &__box {
+        max-height: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .section-page__search .search__form{
+    width: calc(100vw - 90px);
+  }
+  .device-list__btn-list {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .device-list__btn-wrap {
+    width: 100%;
+  }
+  .device-list__wrap {
+    padding: 18px;
+  }
+  .section-list__item:not(:last-child) {
+    margin-bottom: 10px;
   }
 }

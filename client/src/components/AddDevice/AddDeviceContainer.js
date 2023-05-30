@@ -25,15 +25,15 @@ const AddDeviceContainer = ({setModal, defaultSectionId}) => {
                     Authorization: `Bearer ${token}`}
             }).then((response) => response.json())
     }, {
-        onSuccess: () => {
-            message("Устройство добавлено")
+        onError: (context) => {
+            message(`Возникла ошибка: ${context.message}`)
+        },
+        onSuccess: (context,variables) => {
+            message(context.message)
             setAddDeviceForm({name: '', idType: '', idSection: defaultSectionId || ''})
             setModal(false)
             queryClient.invalidateQueries('deviceList')
 
-        },
-        onError: (error) => {
-            message(`Возникла ошибка: ${error}`)
         }
     })
 
@@ -41,8 +41,23 @@ const AddDeviceContainer = ({setModal, defaultSectionId}) => {
         window.M.updateTextFields()
     }, [message])
 
-    const addDevice = async (form) =>{
-        addDeviceMutation.mutate(form)
+    const addDevice = async (form) => {
+        let error = 0;
+        if (form.name === ''){
+            message("Введите название устройства")
+            error++;
+        }
+        if (form.idType === ''){
+            message("Выберете тип устройства")
+            error++;
+        }
+        if (form.idSection === '') {
+            message("Выберете тип анкерный участок на котором расположено устройство")
+            error++;
+        }
+        if(error === 0){
+            addDeviceMutation.mutate(form)
+        }
     }
 
     if (loadingListDeviceType || loadingListSectionAll) {
