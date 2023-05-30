@@ -2,12 +2,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 280px;
     z-index: 100;
     &__container {
         width: 280px;
-        height: 100vh;
+        height: 100%;
         background: $lightColor;
         display: flex;
         flex-direction: column;
