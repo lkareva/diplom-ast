@@ -2069,8 +2069,7 @@ strong.red {
 /* Стили auth */
 .auth {
   background: #D9D9D9;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
